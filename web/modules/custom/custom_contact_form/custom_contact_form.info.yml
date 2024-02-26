@@ -1,0 +1,6 @@
+name: 'Custom Contact Form'
+type: module
+description: 'Provides a custom contact form.'
+package: Custom
+core_version_requirement: ^10
+

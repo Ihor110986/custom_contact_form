@@ -1,0 +1,38 @@
+<?php
+use Drupal\Core\Database\Database;
+
+function custom_contact_form_install() {
+  // Delete the table if it already exists.
+  if (Database::getConnection()->schema()->tableExists('custom_contact_form_data')) {
+    Database::getConnection()->schema()->dropTable('custom_contact_form_data');
+  }
+
+  // We get the database schema and create a new table.
+  $schema = Database::getConnection()->schema();
+  $table = [
+    'description' => 'Stores custom contact form data.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'message' => [
+        'type' => 'text',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  $schema->createTable('custom_contact_form_data', $table);
+}
